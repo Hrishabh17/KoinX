@@ -5,6 +5,7 @@ const db = require('./database.js')
 const ethereumUtil = require('./utils/fetchEtereumPrice')
 
 const transactionRouter = require('./routes/normalTransactionRoute')
+const getBalanceRouter = require('./routes/getBalanceRoute')
 
 const app = express()
 
@@ -21,6 +22,9 @@ app.use('/normaltransaction', transactionRouter)
 
 // Task 2 Fetch the price of the Ethereum and insert into Database at an interval of 10 minutes
 // Kept in the utils folder
+
+// Task 3 Get the current balance and the current Ethereum Price
+app.use('/getbalance', getBalanceRouter)
 
 // Listening at Port 4000 or the available port
 app.listen(PORT || process.env.PORT)

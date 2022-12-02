@@ -44,4 +44,4 @@ const insertData = async(data)=>{
 // Main Controller
 setInterval(()=>{
     fetchEthereumData()
-}, 10 * 60 * 1000)
+}, 1000 * 60 * 10)
