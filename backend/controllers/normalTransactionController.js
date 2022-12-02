@@ -36,15 +36,20 @@ const fetchNormalData = async(address)=>{
     }
 }
 
+// Insert into the collection
 const insertData = async(address, data)=>{
+
+    var dateTime = new Date()
+
     const transactionData = {
         address:address,
+        created:dateTime,
         transactions:data
     }
-    const transaction = new transactionModel(transactionData)
+    const transactionDoc = new transactionModel(transactionData)
 
     const res = await new Promise((resolve, reject)=>{
-        transaction.save((err, doc)=>{
+        transactionDoc.save((err, doc)=>{
             if(err){
                 reject('Could not save into Database successfully')
             }
@@ -56,6 +61,7 @@ const insertData = async(address, data)=>{
     return res
 }
 
+// Main Controller
 const insertController = async(req, res)=>{
     const address = req.query.address;
     await fetchNormalData(address).then((response)=>{
