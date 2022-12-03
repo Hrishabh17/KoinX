@@ -10,7 +10,7 @@ const getBalanceRouter = require('./routes/getBalanceRoute')
 const app = express()
 
 // Port
-const PORT = 4000;
+const PORT = process.env.PORT || 1337;
 
 // MiddleWares
 app.use(cors());
@@ -26,5 +26,5 @@ app.use('/normaltransaction', transactionRouter)
 // Task 3 Get the current balance and the current Ethereum Price
 app.use('/getbalance', getBalanceRouter)
 
-// Listening at Port 4000 or the available port
-app.listen(PORT || process.env.PORT)
+// Listening atthe available port or Port 1337
+app.listen(PORT)
