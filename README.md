@@ -33,6 +33,7 @@ ________________________________________________________________________________
 
       On Success:   {"userBalance":163895865906129440,"ethereumPrice":105090}
 
+      On Address Not Found:  {"userBalance": "Address Not found", "ethereumPrice": 103956}
 
 Structure of the Project: 
                       .
