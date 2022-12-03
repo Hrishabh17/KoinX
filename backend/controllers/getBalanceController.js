@@ -27,15 +27,21 @@ const fetchTransactionData = async(address)=>{
             else{
                 var userBalance = 0
 
-                doc[0].transactions.map((data)=>{
-                    if(data.from === address){
-                        userBalance -= parseInt(data.value)
-                    }
-                    else{
-                        userBalance += parseInt(data.value)
-                    }
-                })
-                resolve(userBalance)
+                if(doc[0]){
+
+                    doc[0].transactions.map((data)=>{
+                        if(data.from === address){
+                            userBalance -= parseInt(data.value)
+                        }
+                        else{
+                            userBalance += parseInt(data.value)
+                        }
+                    })
+                    resolve(userBalance)
+                }
+                else{
+                    reject('Address does not exists')
+                }
                 
             }
         })
@@ -47,10 +53,12 @@ const fetchTransactionData = async(address)=>{
 const fetchController = async(req, res)=>{
     const address = req.query.address;
 
-    const userBalance = await fetchTransactionData(address)
-    const ethereumPrice = await fetchRecentEthereumPrice()
+    const ethereumPrice = await fetchRecentEthereumPrice().catch((err)=>{
+    })
+    const userBalance = await fetchTransactionData(address).catch((err)=>{
+    })
 
-    res.send({userBalance:userBalance, ethereumPrice:ethereumPrice})
+    res.send({userBalance:userBalance?userBalance:'Address Not found', ethereumPrice:ethereumPrice})
 
 }
 
